@@ -9,7 +9,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody String body) {
-        return ResponseEntity.ok("Login correcto ✅");
+        return ResponseEntity.ok("Login correctoo ✅");
     }
 
     @PostMapping("/logout")
