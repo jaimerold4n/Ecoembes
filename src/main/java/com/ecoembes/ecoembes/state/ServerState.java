@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.stereotype.Component;
+
+@Component
+
+
+
 // Esta clase simula la "memoria" del servidor
 public class ServerState {
 
