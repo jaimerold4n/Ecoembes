@@ -41,10 +41,10 @@ public class ServicioContenedor {
         System.out.println("Contenedor creado: " + nuevoId + " en " + localizacion + " con esta capacidad: " + capacidad);
 
         return new EstadoContenedorDTO(
-        		contenedor.obtenerIdContenedor(),
-        		contenedor.obtenerLocalizacion(),
-        		contenedor.obtenerNivelDeLLenado(),
-        		contenedor.obtenerNumeroContenedor()
+        		contenedor.getContenedorId(),
+        		contenedor.getLocalizacion(),
+        		contenedor.getNivelDeLlenado(),
+        		contenedor.getNumeroContenedor()
         );
     }
 
@@ -64,10 +64,10 @@ public class ServicioContenedor {
 
         List<EstadoContenedorDTO> resultado = contenedores.stream()
                 .map(d -> new EstadoContenedorDTO(
-                        d.obtenerIdContenedor(),
-                        d.obtenerLocalizacion(),
-                        d.obtenerNivelDeLLenado(),
-                        d.obtenerNumeroConetenedor()
+                        d.getContenedorId(),
+                        d.getLocalizacion(),
+                        d.getNivelDeLlenado(),
+                        d.getNumeroContenedor()
                 ))
                 .collect(Collectors.toList());
 
@@ -87,10 +87,10 @@ public class ServicioContenedor {
 
         List<UsoContenedorDTO> resultado = usos.stream()
                 .map(u -> new UsoContenedorDTO(
-                        u.obtenerContenedor().obtenerIdContenedor(),
-                        u.obtenerFecha(),
-                        u.obtenerNivelDeLLenado(),
-                        u.obtenerCuentaDeContenedores()
+                        u.getContenedor().getContenedorId(),
+                        u.getFecha(),
+                        u.getNivelDeLlenado(),
+                        u.getNumeroDeContenedores()
                 ))
                 .collect(Collectors.toList());
 
@@ -115,10 +115,10 @@ public class ServicioContenedor {
         System.out.println("Actualizar contenedor " + IdContenedor + ": " + nivelDeLlenado + ", " + numeroContenedor + " contenedores");
 
         return new EstadoContenedorDTO(
-        		contenedor.obtenerIdContenedor(),
-                contenedor.obtenerLocalizacion(),
-                contenedor.ontenerNivelDeLlenado(),
-                contenedor.obtenerNumeroContenedor()
+        		contenedor.getContenedorId(),
+                contenedor.getLocalizacion(),
+                contenedor.getNivelDeLlenado(),
+                contenedor.getNumeroContenedor()
         );
     }
 
