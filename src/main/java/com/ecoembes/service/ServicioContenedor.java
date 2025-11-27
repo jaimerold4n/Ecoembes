@@ -2,11 +2,8 @@ package com.ecoembes.service;
 
 import com.ecoembes.domain.Contenedor;
 import com.ecoembes.domain.Uso;
-import com.ecoembes.domain.Uso;
 import com.ecoembes.dto.EstadoContenedorDTO;
 import com.ecoembes.dto.UsoContenedorDTO;
-import com.ecoembes.repositorios.ContenedorRepositorio;
-import com.ecoembes.repositorios.UsoRepositorio;
 import com.ecoembes.repositorios.ContenedorRepositorio;
 import com.ecoembes.repositorios.UsoRepositorio;
 import org.springframework.stereotype.Service;
@@ -57,7 +54,7 @@ public class ServicioContenedor {
 
         List<Contenedor> contenedores;
         if (codigoPostal != null && !codigoPostal.isEmpty()) {
-        	contenedores = repositorioContenedor.findByPostalCode(codigoPostal);
+        	contenedores = repositorioContenedor.encontrarCodigoPostal(codigoPostal);
         } else {
         	contenedores = repositorioContenedor.findAll();
         }
@@ -79,7 +76,7 @@ public class ServicioContenedor {
      * Queries usage history for dumpsters within a date range.
      */
     @Transactional(readOnly = true)
-    public List<UsoContenedorDTO> queryDumpsterUsage(LocalDate fechaInicio, LocalDate fechaFin) {
+    public List<UsoContenedorDTO> consultaUsoContenedor(LocalDate fechaInicio, LocalDate fechaFin) {
         System.out.println("=== OBTENER USO CONTENEDOR ===");
         System.out.println("Date range: " + fechaInicio + " to " + fechaFin);
 
@@ -102,7 +99,7 @@ public class ServicioContenedor {
      * Updates dumpster status (for testing/simulation purposes)
      */
     @Transactional
-    public EstadoContenedorDTO updateDumpsterStatus(String IdContenedor, String nivelDeLlenado, Integer numeroContenedor) {
+    public EstadoContenedorDTO actualizarEstadoContenedor(String IdContenedor, String nivelDeLlenado, Integer numeroContenedor) {
         Contenedor contenedor = repositorioContenedor.findById(IdContenedor)
                 .orElseThrow(() -> new RuntimeException("Conetenedor no encotrado: " + IdContenedor));
 
