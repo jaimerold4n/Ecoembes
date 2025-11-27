@@ -48,7 +48,7 @@ public class ServicioEmpleado {
         long timestamp = Instant.now().toEpochMilli();
         String token = String.valueOf(timestamp);
 
-        servicioManager.storeToken(token, datosEmpleado);
+        servicioManager.tokenAlmacenado(token, datosEmpleado);
 
         System.out.println("Logeado correctamente para " + datosEmpleado.nombre() + ". Token creado: " + token);
         return new AuthTokenDTO(token, timestamp);
