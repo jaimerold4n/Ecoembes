@@ -59,6 +59,6 @@ public class ServicioEmpleado {
      */
     public void logout(String token) {
         servicioManager.removeToken(token);
-        System.out.println("Logout successful for token: " + token);
+        System.out.println("Token deslogueado correctamente: " + token);
     }
 }

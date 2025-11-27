@@ -68,7 +68,7 @@ public class ServicioContenedor {
                 ))
                 .collect(Collectors.toList());
 
-        System.out.println("Returning " + resultado.size() + " contenedores");
+        System.out.println("Devolviendo " + resultado.size() + " contenedores");
         return resultado;
     }
 
@@ -78,7 +78,7 @@ public class ServicioContenedor {
     @Transactional(readOnly = true)
     public List<UsoContenedorDTO> consultaUsoContenedor(LocalDate fechaInicio, LocalDate fechaFin) {
         System.out.println("=== OBTENER USO CONTENEDOR ===");
-        System.out.println("Date range: " + fechaInicio + " to " + fechaFin);
+        System.out.println("Rango de fecha: " + fechaInicio + " to " + fechaFin);
 
         List<Uso> usos = repositorioUso.findByDateBetween(fechaInicio, fechaFin);
 
