@@ -35,9 +35,8 @@ public class Tarea {
 
     protected Tarea() {}
 
-    public Tarea(Long id, Planta planta, Contenedor contenedor, Empleado trabajador, LocalDate fechaTarea) {
+    public Tarea(Planta planta, Contenedor contenedor, Empleado trabajador, LocalDate fechaTarea) {
 		super();
-		this.id = id;
 		this.planta = planta;
 		this.contenedor = contenedor;
 		this.trabajador = trabajador;
