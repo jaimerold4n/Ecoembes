@@ -152,7 +152,7 @@ public class ControladorEcoembes {
             @Parameter(description = "Fecha fin de la obtención (YYYY-MM-DD)", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin
     ) {
         validate(token);
-        List<UsoContenedorDTO> listUsos = servicioContenedor.getUsoContenedor(fechaInicio, fechaFin);
+        List<UsoContenedorDTO> listUsos = servicioContenedor.consultaUsoContenedor(fechaInicio, fechaFin);
         return ResponseEntity.ok(listUsos);
     }
 
