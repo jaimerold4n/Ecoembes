@@ -29,13 +29,13 @@ public class Uso {
 
     protected Uso() {}
 
-    public Uso(Long id, Contenedor contenedor, LocalDate fecha, String nivelDeLlenado, Integer numeroDeContenedores) {
+    public Uso(Long id, Contenedor contenedor, LocalDate fecha, String nivelDeLlenado, Integer numeroDeContenedor	) {
 		super();
 		this.id = id;
 		this.contenedor = contenedor;
 		this.fecha = fecha;
 		this.nivelDeLlenado = nivelDeLlenado;
-		this.numeroDeContenedores = numeroDeContenedores;
+		this.numeroDeContenedores = numeroDeContenedor;
 		this.fechaRegistro = LocalDateTime.now();
 	}
 
@@ -75,8 +75,8 @@ public class Uso {
 		return numeroDeContenedores;
 	}
 
-	public void setNumeroDeContenedores(Integer numeroDeContenedores) {
-		this.numeroDeContenedores = numeroDeContenedores;
+	public void setNumeroDeContenedores(Integer numeroDeContenedor) {
+		this.numeroDeContenedores = numeroDeContenedor;
 	}
 
 	public LocalDateTime getFechaRegistro() {

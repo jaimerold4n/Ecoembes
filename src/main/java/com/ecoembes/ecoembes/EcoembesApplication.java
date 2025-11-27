@@ -1,4 +1,4 @@
-package com.ecoembes.ecoembes;
+package com.ecoembes.ecoembesaplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

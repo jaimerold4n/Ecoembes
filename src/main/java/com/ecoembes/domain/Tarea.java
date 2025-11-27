@@ -22,7 +22,7 @@ public class Tarea {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trabajador_id", nullable = false)
-    private Trabajador trabajador;
+    private Empleado trabajador;
 
     @Column(nullable = false)
     private LocalDate fechaTarea;
@@ -35,7 +35,7 @@ public class Tarea {
 
     protected Tarea() {}
 
-    public Tarea(Long id, Planta planta, Contenedor contenedor, Trabajador trabajador, LocalDate fechaTarea) {
+    public Tarea(Long id, Planta planta, Contenedor contenedor, Empleado trabajador, LocalDate fechaTarea) {
 		super();
 		this.id = id;
 		this.planta = planta;
@@ -70,11 +70,11 @@ public class Tarea {
 		this.contenedor = contenedor;
 	}
 
-	public Trabajador getTrabajador() {
+	public Empleado getTrabajador() {
 		return trabajador;
 	}
 
-	public void setTrabajador(Trabajador trabajador) {
+	public void setTrabajador(Empleado trabajador) {
 		this.trabajador = trabajador;
 	}
 

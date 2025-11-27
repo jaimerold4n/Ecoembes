@@ -3,11 +3,11 @@ package com.ecoembes.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "trabajadores")
-public class Trabajador {
+@Table(name = "empleados")
+public class Empleado {
 	
 	@Id
-	private String trabajadorID;
+	private String IdEmpleado;
 
 	@Column(nullable = false)
 	private String nombre;
@@ -18,22 +18,22 @@ public class Trabajador {
 	@Column(nullable = false)
 	private String contrasena;
 
-	protected Trabajador() {}
+	protected Empleado() {}
 
-	public Trabajador(String trabajadorID, String nombre, String email, String contrasena) {
+	public Empleado(String IdEmpleado, String nombre, String email, String contrasena) {
 		super();
-		this.trabajadorID = trabajadorID;
+		this.IdEmpleado = IdEmpleado;
 		this.nombre = nombre;
 		this.email = email;
 		this.contrasena = contrasena;
 	}
 
-	public String getTrabajadorID() {
-		return trabajadorID;
+	public String getIdEmpleado() {
+		return IdEmpleado;
 	}
 
-	public void setTrabajadorID(String trabajadorID) {
-		this.trabajadorID = trabajadorID;
+	public void setEmpleadoID(String IdEmpleado) {
+		this.IdEmpleado = IdEmpleado;
 	}
 
 	public String getNombre() {
