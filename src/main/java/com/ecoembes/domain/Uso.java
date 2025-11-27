@@ -29,9 +29,8 @@ public class Uso {
 
     protected Uso() {}
 
-    public Uso(Long id, Contenedor contenedor, LocalDate fecha, String nivelDeLlenado, Integer numeroDeContenedor	) {
+    public Uso(Contenedor contenedor, LocalDate fecha, String nivelDeLlenado, Integer numeroDeContenedor) {
 		super();
-		this.id = id;
 		this.contenedor = contenedor;
 		this.fecha = fecha;
 		this.nivelDeLlenado = nivelDeLlenado;
