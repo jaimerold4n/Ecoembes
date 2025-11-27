@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Empleado {
 	
 	@Id
-	private String IdEmpleado;
+	private String idEmpleado;
 
 	@Column(nullable = false)
 	private String nombre;
@@ -20,20 +20,20 @@ public class Empleado {
 
 	protected Empleado() {}
 
-	public Empleado(String IdEmpleado, String nombre, String email, String contrasena) {
+	public Empleado(String idEmpleado, String nombre, String email, String contrasena) {
 		super();
-		this.IdEmpleado = IdEmpleado;
+		this.idEmpleado = idEmpleado;
 		this.nombre = nombre;
 		this.email = email;
 		this.contrasena = contrasena;
 	}
 
 	public String getIdEmpleado() {
-		return IdEmpleado;
+		return idEmpleado;
 	}
 
-	public void setEmpleadoID(String IdEmpleado) {
-		this.IdEmpleado = IdEmpleado;
+	public void setEmpleadoID(String idEmpleado) {
+		this.idEmpleado = idEmpleado;
 	}
 
 	public String getNombre() {
