@@ -10,8 +10,8 @@ import com.ecoembes.repositorios.TareaRespositorio;
 import com.ecoembes.repositorios.ContenedorRepositorio;
 import com.ecoembes.repositorios.EmpleadoRepositorio;
 import com.ecoembes.repositorios.PlantaRepositorio;
-//import com.ecoembes.service.remote.ServiceGateway;
-//import com.ecoembes.service.remote.ServiceGatewayFactory;
+import com.ecoembes.remoto.ServicioPuertas;
+import com.ecoembes.remoto.ServicioFrabicaPuerta;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,17 +28,17 @@ public class ServicioPlanta {
     private final ContenedorRepositorio contenedorRepositorio;
     private final EmpleadoRepositorio empleadoRepositorio;
     private final TareaRespositorio tareaRepositorio;
-    private final ServiceGatewayFactory serviceGatewayFactory;
+    private final ServicioFrabicaPuerta servicioFabricaPuerta;
 
     public ServicioPlanta(PlantaRepositorio plantaRepositorio, ContenedorRepositorio contenedorRepositorio,
 			EmpleadoRepositorio empleadoRepositorio, TareaRespositorio tareaRepositorio,
-			ServiceGatewayFactory serviceGatewayFactory) {
+			ServicioFrabicaPuerta servicioFabricaPuerta) {
 		super();
 		this.plantaRepositorio = plantaRepositorio;
 		this.contenedorRepositorio = contenedorRepositorio;
 		this.empleadoRepositorio = empleadoRepositorio;
 		this.tareaRepositorio = tareaRepositorio;
-		this.serviceGatewayFactory = serviceGatewayFactory;
+		this.servicioFabricaPuerta = servicioFabricaPuerta;
 	}
 
 	@Transactional(readOnly = true)
@@ -80,10 +80,10 @@ public class ServicioPlanta {
 
     @Transactional
     public Double getCapacidadPlanta(String plantaId) throws Exception {
-        Optional<Planta> planta = plantaRepositorio.findById(plantaId);
+        Optional<Planta> planta = plantaRepositorio.enocntrarPorId(plantaId);
         if (planta.isPresent()) {
-            ServiceGateway serviceGateway = serviceGatewayFactory.getServiceGateway(planta.get().getGatewayType());
-            return serviceGateway.getPlantCapacity(planta.get());
+            ServicioPuertas servicioPuerta = servicioFabricaPuerta.getServicioPuerta(planta.get().getTipoPuerta());
+            return servicioPuerta.getCapacidadPlanta(planta.get());
         }
         return null;
     }
