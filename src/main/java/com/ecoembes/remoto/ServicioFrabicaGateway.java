@@ -5,17 +5,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServicioFrabicaPuerta {
+public class ServicioFrabicaGateway {
 
     private final ApplicationContext contexto;
 
     @Autowired
-    public ServicioFrabicaPuerta(ApplicationContext contexto) {
+    public ServicioFrabicaGateway(ApplicationContext contexto) {
         this.contexto = contexto;
     }
 
-    public ServicioPuertas getServicioPuertas(String tipo) {
-        return contexto.getBean(tipo, ServicioPuertas.class);
+    public ServiciosGateway getServiciosGatway(String tipo) {
+        return contexto.getBean(tipo, ServiciosGateway.class);
     }
 }
 

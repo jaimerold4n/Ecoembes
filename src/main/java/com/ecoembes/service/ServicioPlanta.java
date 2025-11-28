@@ -10,8 +10,8 @@ import com.ecoembes.repositorios.TareaRespositorio;
 import com.ecoembes.repositorios.ContenedorRepositorio;
 import com.ecoembes.repositorios.EmpleadoRepositorio;
 import com.ecoembes.repositorios.PlantaRepositorio;
-import com.ecoembes.remoto.ServicioPuertas;
-import com.ecoembes.remoto.ServicioFrabicaPuerta;
+import com.ecoembes.remoto.ServiciosGateway;
+import com.ecoembes.remoto.ServicioFrabicaGateway;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,11 +28,11 @@ public class ServicioPlanta {
     private final ContenedorRepositorio contenedorRepositorio;
     private final EmpleadoRepositorio empleadoRepositorio;
     private final TareaRespositorio tareaRepositorio;
-    private final ServicioFrabicaPuerta servicioFabricaPuerta;
+    private final ServicioFrabicaGateway servicioFabricaPuerta;
 
     public ServicioPlanta(PlantaRepositorio plantaRepositorio, ContenedorRepositorio contenedorRepositorio,
 			EmpleadoRepositorio empleadoRepositorio, TareaRespositorio tareaRepositorio,
-			ServicioFrabicaPuerta servicioFabricaPuerta) {
+			ServicioFrabicaGateway servicioFabricaPuerta) {
 		super();
 		this.plantaRepositorio = plantaRepositorio;
 		this.contenedorRepositorio = contenedorRepositorio;
@@ -82,7 +82,7 @@ public class ServicioPlanta {
     public Double getCapacidadPlanta(String plantaId) throws Exception {
         Optional<Planta> planta = plantaRepositorio.enocntrarPorId(plantaId);
         if (planta.isPresent()) {
-            ServicioPuertas servicioPuerta = servicioFabricaPuerta.getServicioPuerta(planta.get().getTipoPuerta());
+            ServiciosGateway servicioPuerta = servicioFabricaPuerta.getServicioPuerta(planta.get().getTipoPuerta());
             return servicioPuerta.getCapacidadPlanta(planta.get());
         }
         return null;
