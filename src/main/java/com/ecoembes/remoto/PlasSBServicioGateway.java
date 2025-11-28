@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service("PlasSB")
-public class PlasSBServicioPuerta implements ServicioPuertas {
+public class PlasSBServicioGateway implements ServiciosGateway {
 
     private final RestTemplate restTemplate;
 
-    public PlasSBServicioPuerta() {
+    public PlasSBServicioGateway() {
         this.restTemplate = new RestTemplate();
     }
 
-    public PlasSBServicioPuerta(RestTemplate restTemplate) {
+    public PlasSBServicioGateway(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

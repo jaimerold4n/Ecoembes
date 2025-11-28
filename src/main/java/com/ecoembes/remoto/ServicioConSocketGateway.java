@@ -9,15 +9,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 @Service("ContSocket")
-public class ServicioConSocketPuerta implements ServicioPuertas {
+public class ServicioConSocketGateway implements ServiciosGateway {
 
     private FabricaSockets fabricaSockets;
 
-    public ServicioConSocketPuerta() {
+    public ServicioConSocketGateway() {
         this.fabricaSockets = new FabricaPredeterminadaSockets();
     }
 
-    public ServicioConSocketPuerta(FabricaSockets fabricaSockets) {
+    public ServicioConSocketGateway(FabricaSockets fabricaSockets) {
         this.fabricaSockets = fabricaSockets;
     }
 
