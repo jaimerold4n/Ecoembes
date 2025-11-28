@@ -28,19 +28,19 @@ public class Planta {
     private int puerto;
 
     @Column(nullable = true)
-    private String tipoPuerta;
+    private String tipoPuertaDeEnlace;
 
     @OneToMany(mappedBy = "planta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarea> tareas = new ArrayList<>();
 
     protected Planta() {}
 
-    public Planta(String plantaId, String nombre, Double capacidadDisponible, String tipo, String tipoPuerta) {
+    public Planta(String plantaId, String nombre, Double capacidadDisponible, String tipo, String tipoPuertaDeEnlace) {
         this.plantaId = plantaId;
         this.nombre = nombre;
         this.capacidadDisponible = capacidadDisponible;
         this.tipo = tipo;
-        this.tipoPuerta = tipoPuerta;
+        this.tipoPuertaDeEnlace = tipoPuertaDeEnlace;
     }
 
 	public String getPlantaId() {
@@ -91,12 +91,12 @@ public class Planta {
 		this.puerto = puerto;
 	}
 
-	public String getTipoPuerta() {
-		return tipoPuerta;
+	public String getTipoPuertaDeEnlace() {
+		return tipoPuertaDeEnlace;
 	}
 
-	public void setTipoPuerta(String tipoPuerta) {
-		this.tipoPuerta = tipoPuerta;
+	public void setTipoPuerta(String tipoPuertaDeEnlace ) {
+		this.tipoPuertaDeEnlace = tipoPuertaDeEnlace;
 	}
 
 	public List<Tarea> getTareas() {

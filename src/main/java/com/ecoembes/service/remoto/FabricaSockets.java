@@ -1,4 +1,4 @@
-package com.ecoembes.remoto;
+package com.ecoembes.service.remoto;
 
 import java.io.IOException;
 import java.net.Socket;

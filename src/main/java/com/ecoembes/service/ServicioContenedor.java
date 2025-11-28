@@ -47,7 +47,7 @@ public class ServicioContenedor {
 
 
     @Transactional(readOnly = true)
-    public List<EstadoContenedorDTO> getDumpsterStatus(String codigoPostal, LocalDate fecha) {
+    public List<EstadoContenedorDTO> getEstadoContenedor(String codigoPostal, LocalDate fecha) {
         System.out.println("=== OBTENER ESTADO CONTENEDOR ===");
         System.out.println("Filtro codigo postal: " + codigoPostal);
         System.out.println("Filtro fecha: " + fecha);

@@ -164,7 +164,7 @@ public class ControladorEcoembes {
             @ApiResponse(responseCode = "401", description = "Token inválido")
     })
     @GetMapping("/plantas")
-    public ResponseEntity<List<CapacidadPlantaDTO>> obtenerTodasLasPlantas(
+    public ResponseEntity<List<CapacidadPlantaDTO>> getTodasLasPlantas(
             @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token
     ) {
         validate(token);
@@ -207,19 +207,19 @@ public class ControladorEcoembes {
 
     @Operation(summary = "Asignar uno o más contenedores a una planta de reciclaje")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Contenedor asignado correctamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AssignmentResponseDTO.class))),
+            @ApiResponse(responseCode = "200", description = "Contenedor asignado correctamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RespuestaTareaDTO.class))),
             @ApiResponse(responseCode = "401", description = "Token inválido")
     })
     @PostMapping("/plantas/asignación")
-    public ResponseEntity<AsignarContenedorDTO> asignarContenedorAPlanta(
+    public ResponseEntity<RespuestaTareaDTO> asignarContenedorAPlanta(
             @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
             @Valid @RequestBody AsignarContenedorDTO assignment
     ) {
         DatosEmpleadoDTO employeeData = validate(token);
-        AssignmentResponseDTO response = servicioPlanta.assignDumpsters(
-                employeeData.employeeID(),
-                assignment.plantaID(),
-                assignment.dumpsterIDs()
+        RespuestaTareaDTO response = servicioPlanta.asignarContenedores(
+                employeeData.idEmpleado(),
+                assignment.idPlanta(),
+                assignment.idContenedores()
         );
         return ResponseEntity.ok(response);
     }
