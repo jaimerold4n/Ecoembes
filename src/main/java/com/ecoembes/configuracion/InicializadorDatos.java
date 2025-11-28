@@ -39,8 +39,8 @@ public class InicializadorDatos implements CommandLineRunner {
     }
 
     private void inicializarEmpleados() {
-        Empleado admin = new Empleado("E001", "Admin User", "admin@ecoembes.com", "password123");
-        Empleado empleado = new Empleado("E002", "Jane Doe", "employee@ecoembes.com", "pass");
+        Empleado admin = new Empleado("E001", "Usuario Admin", "admin@ecoembes.com", "contrasena123");
+        Empleado empleado = new Empleado("E002", "Jose Luis", "empleado@ecoembes.com", "pass");
 
         empleadoRepositorio.save(admin);
         empleadoRepositorio.save(empleado);
@@ -49,7 +49,7 @@ public class InicializadorDatos implements CommandLineRunner {
     }
 
     private void inicializarPlantas() {
-        Planta plassb = new Planta("PLASSB-01", "PlasSB Ltd.", 150.0, "PLASTIC", "PlasSB");
+        Planta plassb = new Planta("PLASSB-01", "PlasSB Ltd.", 150.0, "PLASTICO", "PlasSB");
         plassb.setAnfitrion("localhost");
         plassb.setPuerto(8080);
         Planta contsocket = new Planta("CONTSO-01", "ContSocket Ltd.", 80.5, "GENERAL", "ContSocket");
@@ -59,24 +59,24 @@ public class InicializadorDatos implements CommandLineRunner {
         plantaRepositorio.save(plassb);
         plantaRepositorio.save(contsocket);
 
-        System.out.println("Initialized 2 plants");
+        System.out.println("Inicializar 2 plantas");
     }
 
     private void inicializarContenedores() {
-        Contenedor c1 = new Contenedor("C-123", "Deusto, Bilbao 48007", "48007", 5000.0);
-        c1.actualizarEstado("green", 10);
+        Contenedor c1 = new Contenedor("C-123", "Deusto, Bilbao 48010", "48010", 5200.0);
+        c1.actualizarEstado("verde", 10);
 
-        Contenedor c2 = new Contenedor("C-456", "Indautxu, Bilbao 48011", "48011", 4500.0);
-        c2.actualizarEstado("orange", 400);
+        Contenedor c2 = new Contenedor("C-456", "Indautxu, Bilbao 48012", "48012", 4550.0);
+        c2.actualizarEstado("naranja", 400);
 
-        Contenedor c3 = new Contenedor("C-789", "Santutxu, Bilbao 48004", "48004", 6000.0);
-        c3.actualizarEstado("green", 5);
+        Contenedor c3 = new Contenedor("C-789", "Zabalburu, Bilbao 48014", "48014", 6300.0);
+        c3.actualizarEstado("verde", 5);
 
         contenedorRepositorio.save(c1);
         contenedorRepositorio.save(c2);
         contenedorRepositorio.save(c3);
 
-        System.out.println("Initialized 3 dumpsters");
+        System.out.println("Inicializar 3 contenedores");
     }
 
     private void inicializarUsos() {
