@@ -6,10 +6,10 @@ import com.ecoembes.domain.Empleado;
 import com.ecoembes.domain.Planta;
 import com.ecoembes.dto.RespuestaTareaDTO;
 import com.ecoembes.dto.CapacidadPlantaDTO;
-import com.ecoembes.repositorios.TareaRespositorio;
 import com.ecoembes.repositorios.ContenedorRepositorio;
 import com.ecoembes.repositorios.EmpleadoRepositorio;
 import com.ecoembes.repositorios.PlantaRepositorio;
+import com.ecoembes.repositorios.TareaRepositorio;
 import com.ecoembes.service.remoto.PuertaDeEnlaceServicio;
 import com.ecoembes.service.remoto.PuertaDeEnlaceServicioFabrica;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,11 @@ public class ServicioPlanta {
 	private final PlantaRepositorio plantaRepositorio;
 	private final ContenedorRepositorio contenedorRepositorio;
 	private final EmpleadoRepositorio empleadoRepositorio;
-	private final TareaRespositorio tareaRepositorio;
+	private final TareaRepositorio tareaRepositorio;
 	private final PuertaDeEnlaceServicioFabrica puertaDeEnlaceServicioFabrica;
 
 	public ServicioPlanta(PlantaRepositorio plantaRepositorio, ContenedorRepositorio contenedorRepositorio,
-			EmpleadoRepositorio empleadoRepositorio, TareaRespositorio tareaRepositorio,
+			EmpleadoRepositorio empleadoRepositorio, TareaRepositorio tareaRepositorio,
 			PuertaDeEnlaceServicioFabrica puertaDeEnlaceServicioFabrica) {
 		super();
 		this.plantaRepositorio = plantaRepositorio;
@@ -47,7 +47,6 @@ public class ServicioPlanta {
 		System.out.println("Obteniendo todas las plantas");
 
 		List<Planta> plantas = plantaRepositorio.findAll();
-		LocalDate fechaPredeterminada = LocalDate.now();
 
 		return plantas.stream()
 				.map(p -> new CapacidadPlantaDTO(p.getPlantaId(), p.getNombre(), p.getCapacidadDisponible()))
