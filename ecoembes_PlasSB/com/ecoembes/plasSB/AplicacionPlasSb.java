@@ -1,4 +1,4 @@
-package com.ecoembes.plasb;
+package com.ecoembes.plasSB;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
