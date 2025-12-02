@@ -1,4 +1,3 @@
-
 package com.ecoembes.plasb.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
