@@ -54,7 +54,7 @@ public class ServicioContenedor {
 
         List<Contenedor> contenedores;
         if (codigoPostal != null && !codigoPostal.isEmpty()) {
-        	contenedores = repositorioContenedor.encontrarCodigoPostal(codigoPostal);
+        	contenedores = repositorioContenedor.findByCodigoPostal(codigoPostal);
         } else {
         	contenedores = repositorioContenedor.findAll();
         }

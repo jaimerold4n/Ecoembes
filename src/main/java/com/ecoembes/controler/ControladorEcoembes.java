@@ -5,9 +5,6 @@ import com.ecoembes.exception.InvalidTokenException;
 import com.ecoembes.service.ServicioContenedor;
 import com.ecoembes.service.ServicioEmpleado;
 import com.ecoembes.service.ServicioPlanta;
-import com.ecoembes.service.ServicioContenedor;
-import com.ecoembes.service.ServicioEmpleado;
-import com.ecoembes.service.ServicioPlanta;
 import com.ecoembes.manejoestado.ServicioManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -79,7 +76,7 @@ public class ControladorEcoembes {
             @ApiResponse(responseCode = "401", description = "Token inválido")
     })
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(@Parameter(description = "Sesion del token recibien en el logout") @RequestHeader("Autorización") String token) {
+    public ResponseEntity<Void> logout(@Parameter(description = "Sesion del token recibien en el logout") @RequestHeader("Autorizacion") String token) {
         validate(token);
         servicioEmpleado.logout(token);
         return ResponseEntity.ok().build();
@@ -94,7 +91,7 @@ public class ControladorEcoembes {
     })
     @PostMapping("/contenedores")
     public ResponseEntity<EstadoContenedorDTO> createNewDumpster(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token,
             @Valid @RequestBody NuevoContenedorDTO nuevoContenedor
     ) {
         validate(token);
@@ -108,9 +105,9 @@ public class ControladorEcoembes {
             @ApiResponse(responseCode = "401", description = "Token inválido"),
             @ApiResponse(responseCode = "404", description = "Conetenedor no encontrado")
     })
-    @PutMapping("/dumpsters/{id}")
+    @PutMapping("/contenedores/{id}")
     public ResponseEntity<EstadoContenedorDTO> updateDumpster(
-            @Parameter(description = "Sesion del token recivida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recivida en el login") @RequestHeader("Autorizacion") String token,
             @Parameter(description = "ID Contenedor", required = true) @PathVariable String id,
             @Valid @RequestBody ActualizarContenedorDTO actualizarDatos
     ) {
@@ -130,7 +127,7 @@ public class ControladorEcoembes {
     })
     @GetMapping("/contenedores/estado")
     public ResponseEntity<List<EstadoContenedorDTO>> getDumpsterStatus(
-            @Parameter(description = "Sesion del token recivida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recivida en el login") @RequestHeader("Autorizacion") String token,
             @Parameter(description = "Mirar el código postal de la área", required = true) @RequestParam String codigoPostal,
             @Parameter(description = "Mirar la fecha del estado para (YYYY-MM-DD)", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha
     ) {
@@ -147,7 +144,7 @@ public class ControladorEcoembes {
     })
     @GetMapping("/contenedores/uso")
     public ResponseEntity<List<UsoContenedorDTO>> obtenerUsoContenedor(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token,
             @Parameter(description = "Fecha de inicio de la obtención (YYYY-MM-DD)", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
             @Parameter(description = "Fecha fin de la obtención (YYYY-MM-DD)", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin
     ) {
@@ -165,7 +162,7 @@ public class ControladorEcoembes {
     })
     @GetMapping("/plantas")
     public ResponseEntity<List<CapacidadPlantaDTO>> getTodasLasPlantas(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token
     ) {
         validate(token);
         List<CapacidadPlantaDTO> plantas = servicioPlanta.getTodasLasPlantas();
@@ -180,7 +177,7 @@ public class ControladorEcoembes {
     })
     @GetMapping("/plants/capacity")
     public ResponseEntity<List<CapacidadPlantaDTO>> obtenerCapacidadPlanta(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token,
             @Parameter(description = "Fecha para obtener la capacidad (YYYY-MM-DD)", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
             @Parameter(description = "Opcional ID de planta para filtrar planta específica") @RequestParam(required = false) String IdPlanta
     ) {
@@ -197,7 +194,7 @@ public class ControladorEcoembes {
     })
     @GetMapping("/plantas/{IdPlanta}/capacidad")
     public ResponseEntity<Double> getPlantCapacity(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token,
             @Parameter(description = "Obtener Id Planta para obtener capacidad de ", required = true) @PathVariable String plantaID
     ) throws Exception {
         validate(token);
@@ -212,7 +209,7 @@ public class ControladorEcoembes {
     })
     @PostMapping("/plantas/asignación")
     public ResponseEntity<RespuestaTareaDTO> asignarContenedorAPlanta(
-            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorización") String token,
+            @Parameter(description = "Sesion del token recibida en el login") @RequestHeader("Autorizacion") String token,
             @Valid @RequestBody AsignarContenedorDTO assignment
     ) {
         DatosEmpleadoDTO employeeData = validate(token);

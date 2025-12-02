@@ -31,7 +31,7 @@ public class ServicioEmpleado {
     public AuthTokenDTO login(String email, String contrasena) {
         System.out.println("Intentando iniciar sesion para obtener email: " + email);
 
-        Empleado empleado = empleadoRepositorio.encontrarPorEmail(email)
+        Empleado empleado = empleadoRepositorio.findByEmail(email)
                 .orElseThrow(() -> new LoginException("Email o contraña invalidos"));
 
         if (!empleado.getContrasena().equals(contrasena)) {

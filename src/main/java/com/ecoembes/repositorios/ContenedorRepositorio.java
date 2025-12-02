@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ContenedorRepositorio extends JpaRepository<Contenedor, String> {
-    List<Contenedor> encontrarCodigoPostal(String codigoPostal);
+	List<Contenedor> findByCodigoPostal(String codigoPostal);
 }
 
