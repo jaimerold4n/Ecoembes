@@ -8,8 +8,9 @@ public record ActualizarContenedorDTO(
         @NotBlank(message = "El nivel de llenado no puede estar vacío")
         String nivelDeLlenado,
 
-        @NotNull(message = "El numero del contendor es obligatorio")
-        @Min(value = 0, message = "El numero no puede ser negativo")
+        @NotNull(message = "El número del contenedor es obligatorio")
+        @Min(value = 0, message = "El número no puede ser negativo")
         Integer numeroContenedor
 ) {}
+
 
