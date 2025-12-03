@@ -1,8 +1,9 @@
-package com.ecoembes.plasb.repositorio;
+package com.ecoembes.repositorios;
 
+import com.ecoembes.domain.Planta;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.ecoembes.plasb.domain.Planta;
-
+@Repository
 public interface PlantaRepositorio extends JpaRepository<Planta, String> {
 }

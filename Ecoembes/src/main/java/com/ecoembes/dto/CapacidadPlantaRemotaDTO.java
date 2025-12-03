@@ -1,14 +1,8 @@
-package com.ecoembes.plasb.dto;
+package com.ecoembes.dto;
 
-public class CapacidadPlantaDTO {
-
+public class CapacidadPlantaRemotaDTO {
     private String id;
     private Double capacidad;
-
-    public CapacidadPlantaDTO(String id, Double capacidad) {
-        this.id = id;
-        this.capacidad = capacidad;
-    }
 
     public String getId() {
         return id;
@@ -18,7 +12,7 @@ public class CapacidadPlantaDTO {
         this.id = id;
     }
 
-    public Double getCapacida() {
+    public Double getCapacidad() {
         return capacidad;
     }
 
