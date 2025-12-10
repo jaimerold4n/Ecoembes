@@ -123,4 +123,71 @@ public class PlantaController {
         );
         return ResponseEntity.ok(respuesta);
     }
+
+    @Operation(summary = "Obtener historial de asignaciones de contenedores a plantas")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Historial recuperado correctamente"),
+            @ApiResponse(responseCode = "401", description = "Token inválido")
+    })
+    @GetMapping("/historial-asignaciones")
+    public ResponseEntity<List<HistorialAsignacionDTO>> obtenerHistorialAsignaciones(
+            @Parameter(description = "Token de sesión recibido en el login") 
+            @RequestHeader("Autorizacion") String token,
+            @Parameter(description = "Fecha inicio del rango (YYYY-MM-DD)") 
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
+            @Parameter(description = "Fecha fin del rango (YYYY-MM-DD)") 
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin,
+            @Parameter(description = "ID de planta para filtrar") 
+            @RequestParam(required = false) String plantaId,
+            @Parameter(description = "ID de trabajador para filtrar") 
+            @RequestParam(required = false) String trabajadorId
+    ) {
+        validate(token);
+        List<HistorialAsignacionDTO> historial = servicioPlanta.obtenerHistorialAsignaciones(
+                fechaInicio, fechaFin, plantaId, trabajadorId
+        );
+        return ResponseEntity.ok(historial);
+    }
+
+    @Operation(summary = "Obtener estadísticas de asignaciones por planta")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estadísticas recuperadas correctamente"),
+            @ApiResponse(responseCode = "401", description = "Token inválido")
+    })
+    @GetMapping("/estadisticas-asignaciones")
+    public ResponseEntity<List<EstadisticasAsignacionDTO>> obtenerEstadisticasAsignaciones(
+            @Parameter(description = "Token de sesión recibido en el login") 
+            @RequestHeader("Autorizacion") String token,
+            @Parameter(description = "Fecha inicio del rango (YYYY-MM-DD)", required = true) 
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
+            @Parameter(description = "Fecha fin del rango (YYYY-MM-DD)", required = true) 
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin
+    ) {
+        validate(token);
+        List<EstadisticasAsignacionDTO> estadisticas = servicioPlanta.obtenerEstadisticasAsignaciones(
+                fechaInicio, fechaFin
+        );
+        return ResponseEntity.ok(estadisticas);
+    }
+
+    @Operation(summary = "Obtener historial de asignaciones de un trabajador específico")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Historial del trabajador recuperado correctamente"),
+            @ApiResponse(responseCode = "401", description = "Token inválido")
+    })
+    @GetMapping("/mis-asignaciones")
+    public ResponseEntity<List<HistorialAsignacionDTO>> obtenerMisAsignaciones(
+            @Parameter(description = "Token de sesión recibido en el login") 
+            @RequestHeader("Autorizacion") String token,
+            @Parameter(description = "Fecha inicio del rango (YYYY-MM-DD)") 
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
+            @Parameter(description = "Fecha fin del rango (YYYY-MM-DD)") 
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin
+    ) {
+        DatosEmpleadoDTO datosEmpleado = validate(token);
+        List<HistorialAsignacionDTO> historial = servicioPlanta.obtenerHistorialAsignaciones(
+                fechaInicio, fechaFin, null, datosEmpleado.idEmpleado()
+        );
+        return ResponseEntity.ok(historial);
+    }
 }

@@ -6,6 +6,8 @@ import com.ecoembes.domain.Empleado;
 import com.ecoembes.domain.Planta;
 import com.ecoembes.dto.RespuestaTareaDTO;
 import com.ecoembes.dto.CapacidadPlantaDTO;
+import com.ecoembes.dto.HistorialAsignacionDTO;
+import com.ecoembes.dto.EstadisticasAsignacionDTO;
 import com.ecoembes.repositorios.ContenedorRepositorio;
 import com.ecoembes.repositorios.EmpleadoRepositorio;
 import com.ecoembes.repositorios.PlantaRepositorio;
@@ -120,6 +122,43 @@ public class ServicioPlanta {
 
 		return new RespuestaTareaDTO(empleado.getIdEmpleado(), empleado.getNombre(), planta.getPlantaId(),
 				idsDeContenedorAsignados, fechaTarea.toString(), "Pendiente");
+	}
+
+	/**
+	 * Obtiene el historial de asignaciones con filtros opcionales
+	 */
+	@Transactional(readOnly = true)
+	public List<HistorialAsignacionDTO> obtenerHistorialAsignaciones(
+			LocalDate fechaInicio,
+			LocalDate fechaFin,
+			String plantaId,
+			String trabajadorId) {
+		
+		System.out.println("Obteniendo historial de asignaciones - Filtros: fechaInicio=" + fechaInicio 
+				+ ", fechaFin=" + fechaFin + ", plantaId=" + plantaId + ", trabajadorId=" + trabajadorId);
+		
+		return tareaRepositorio.findHistorialAsignaciones(
+				fechaInicio,
+				fechaFin,
+				plantaId,
+				trabajadorId
+		);
+	}
+
+	/**
+	 * Obtiene estadísticas agregadas de asignaciones por planta
+	 */
+	@Transactional(readOnly = true)
+	public List<EstadisticasAsignacionDTO> obtenerEstadisticasAsignaciones(
+			LocalDate fechaInicio,
+			LocalDate fechaFin) {
+		
+		System.out.println("Obteniendo estadísticas de asignaciones - Rango: " + fechaInicio + " a " + fechaFin);
+		
+		return tareaRepositorio.findEstadisticasAsignaciones(
+				fechaInicio,
+				fechaFin
+		);
 	}
 
 	private Double resolveCapacidad(Planta planta, LocalDate fecha) {

@@ -1,13 +1,13 @@
-package com.example.demo;
+package com.ecoembes.ecoembesaplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcoembesPlasSbApplication {
+public class EcoembesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcoembesPlasSbApplication.class, args);
+		SpringApplication.run(EcoembesApplication.class, args);
 	}
 
 }
