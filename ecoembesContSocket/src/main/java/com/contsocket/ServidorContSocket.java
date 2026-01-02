@@ -28,7 +28,7 @@ public class ServidorContSocket {
                 Socket clientSocket = serverSocket.accept();
                 clienteCounter++;
                 
-                // Crear un hilo para manejar cada cliente
+                
                 Thread clientThread = new Thread(
                     new ClientHandler(clientSocket, plantaService, clienteCounter)
                 );
