@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteneodr creado - Ecoembes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>🌱 Ecoembes</h1>
+            <nav>
+                <a th:href="@{/home}">Home</a>
+                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2> Contenedor creado correctamente!</h2>
+
+            <div class="alert alert-success">
+                <p th:text="${success}"></p>
+            </div>
+
+            <div th:if="${dumpster}">
+                <h3>Detalles de contenedor:</h3>
+                <table>
+                    <tr>
+                        <th>Propiedad</th>
+                        <th>Valor</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ID Contenedor:</strong></td>
+                        <td th:text="${dumpster['dumpsterID']}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Localidad:</strong></td>
+                        <td th:text="${dumpster['location']}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel de llenado:</strong></td>
+                        <td th:text="${dumpster['fillLevel']}"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Número de conteneodres:</strong></td>
+                        <td th:text="${dumpster['containersNumber']}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a th:href="@{/dumpsters/create}" class="btn btn-primary">Crear otro</a>
+                <a th:href="@{/home}" class="btn btn-secondary">Volver a home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
