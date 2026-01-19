@@ -16,7 +16,8 @@ import java.util.Map;
 
 /**
  * HTTP-based Service Proxy implementation.
- * Communicates with the Ecoembes backend API using REST calls.
+ * Comunicación con el backend API de Ecoembes usando REST calls.
+ * ADAPTADO A LOS ENDPOINTS REALES DEL SERVIDOR ECOEMBES
  */
 @Component
 public class HTTPServiceProxy implements IServiceProxy {
@@ -36,10 +37,10 @@ public class HTTPServiceProxy implements IServiceProxy {
         try {
             Map<String, String> credentials = new HashMap<>();
             credentials.put("email", email);
-            credentials.put("contraseña", password);
+            credentials.put("contrasena", password); // ⭐ Cambio: "contrasena" en lugar de "password"
 
-            System.out.println("[PROXY] Intentado logearse para: " + email);
-            System.out.println("[PROXY] Enviado peticion a: /api/v1/login");
+            System.out.println("[PROXY] Intentando login para: " + email);
+            System.out.println("[PROXY] Enviando petición a: /api/v1/login");
 
             Map<String, String> response = webClient.post()
                     .uri("/api/v1/login")
@@ -50,17 +51,17 @@ public class HTTPServiceProxy implements IServiceProxy {
 
             System.out.println("[PROXY] Respuesta recibida: " + response);
             String token = response != null ? response.get("token") : null;
-            System.out.println("[PROXY] token extraído: " + token);
+            System.out.println("[PROXY] Token extraído: " + token);
 
             return token;
         } catch (WebClientResponseException e) {
-            System.err.println("[PROXY] Fallo en el login - Estado: " + e.getStatusCode());
-            System.err.println("[PROXY] Response body: " + e.getResponseBodyAsString());
-            throw new RuntimeException("Fallo en el login: " + e.getMessage(), e);
+            System.err.println("[PROXY] Login fallido - Estado: " + e.getStatusCode());
+            System.err.println("[PROXY] Cuerpo de respuesta: " + e.getResponseBodyAsString());
+            throw new RuntimeException("Login fallido: " + e.getMessage(), e);
         } catch (Exception e) {
-            System.err.println("[PROXY] Fallo inesperado durante el login: " + e.getMessage());
+            System.err.println("[PROXY] Error inesperado durante login: " + e.getMessage());
             e.printStackTrace();
-            throw new RuntimeException("Fallo en el login: " + e.getMessage(), e);
+            throw new RuntimeException("Login fallido: " + e.getMessage(), e);
         }
     }
 
@@ -69,22 +70,27 @@ public class HTTPServiceProxy implements IServiceProxy {
         try {
             webClient.post()
                     .uri("/api/v1/logout")
-                    .header("Authorization", token)
+                    .header("Autorizacion", token) 
                     .retrieve()
                     .bodyToMono(Void.class)
                     .block();
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Fallo en el logout: " + e.getMessage(), e);
+            throw new RuntimeException("Logout fallido: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Map<String, Object> createDumpster(String token, Map<String, Object> dumpsterData) {
         try {
+            // ⭐ Cambio: Adaptar nombres de campos
+            Map<String, Object> adaptedData = new HashMap<>();
+            adaptedData.put("localidad", dumpsterData.get("location"));
+            adaptedData.put("capacidadInicial", dumpsterData.get("initialCapacity"));
+
             return webClient.post()
-                    .uri("/api/v1/dumpsters")
-                    .header("Authorization", token)
-                    .bodyValue(dumpsterData)
+                    .uri("/api/v1/contenedores") 
+                    .header("Autorizacion", token) 
+                    .bodyValue(adaptedData)
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                     .block();
@@ -98,16 +104,16 @@ public class HTTPServiceProxy implements IServiceProxy {
         try {
             return webClient.get()
                     .uri(uriBuilder -> uriBuilder
-                            .path("/api/v1/dumpsters/usage")
-                            .queryParam("startDate", startDate.format(DATE_FORMATTER))
-                            .queryParam("endDate", endDate.format(DATE_FORMATTER))
+                            .path("/api/v1/contenedores/uso")
+                            .queryParam("fechaInicio", startDate.format(DATE_FORMATTER)) 
+                            .queryParam("fechaFin", endDate.format(DATE_FORMATTER)) 
                             .build())
-                    .header("Authorization", token)
+                    .header("Autorizacion", token)
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
                     .block();
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Fallo al obtener uso de contenedores: " + e.getMessage(), e);
+            throw new RuntimeException("Fallo al consultar uso de contenedores: " + e.getMessage(), e);
         }
     }
 
@@ -116,11 +122,11 @@ public class HTTPServiceProxy implements IServiceProxy {
         try {
             return webClient.get()
                     .uri(uriBuilder -> uriBuilder
-                            .path("/api/v1/dumpsters/status")
-                            .queryParam("postalCode", postalCode)
-                            .queryParam("date", date.format(DATE_FORMATTER))
+                            .path("/api/v1/contenedores/estado") 
+                            .queryParam("codigoPostal", postalCode) 
+                            .queryParam("fecha", date.format(DATE_FORMATTER))
                             .build())
-                    .header("Authorization", token)
+                    .header("Autorizacion", token) 
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
                     .block();
@@ -133,8 +139,8 @@ public class HTTPServiceProxy implements IServiceProxy {
     public List<Map<String, Object>> getAllPlants(String token) {
         try {
             return webClient.get()
-                    .uri("/api/v1/plants")
-                    .header("Authorization", token)
+                    .uri("/api/v1/plantas") 
+                    .header("Autorizacion", token) 
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
                     .block();
@@ -149,35 +155,39 @@ public class HTTPServiceProxy implements IServiceProxy {
             return webClient.get()
                     .uri(uriBuilder -> {
                         var builder = uriBuilder
-                                .path("/api/v1/plants/capacity")
-                                .queryParam("date", date.format(DATE_FORMATTER));
+                                .path("/api/v1/plantas/capacidad") 
+                                .queryParam("fecha", date.format(DATE_FORMATTER));
                         if (plantId != null && !plantId.isEmpty()) {
-                            builder.queryParam("plantId", plantId);
+                            builder.queryParam("IdPlanta", plantId); 
                         }
                         return builder.build();
                     })
-                    .header("Authorization", token)
+                    .header("Autorizacion", token) 
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
                     .block();
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Fallo para obtener capacidad de la planta: " + e.getMessage(), e);
+            throw new RuntimeException("Fallo al obtener capacidad de plantas: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Map<String, Object> assignDumpstersToPlant(String token, Map<String, Object> assignmentData) {
         try {
+            
+            Map<String, Object> adaptedData = new HashMap<>();
+            adaptedData.put("idPlanta", assignmentData.get("plantID"));
+            adaptedData.put("idContenedores", assignmentData.get("dumpsterIDs"));
+
             return webClient.post()
-                    .uri("/api/v1/plants/assign")
-                    .header("Authorization", token)
-                    .bodyValue(assignmentData)
+                    .uri("/api/v1/plantas/asignacion") 
+                    .header("Autorizacion", token)
+                    .bodyValue(adaptedData)
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                     .block();
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Fallo al asignar contenedor: " + e.getMessage(), e);
+            throw new RuntimeException("Fallo al asignar contenedores: " + e.getMessage(), e);
         }
     }
 }
-
