@@ -287,7 +287,7 @@ public class WebClientController {
 
             Map<String, Object> result = serviceProxy.assignDumpstersToPlant(
                     sessionModel.getToken(), assignmentData);
-            model.addAttribute("success", "Tarea creada correctamente!");
+            model.addAttribute("sucess", "Tarea creada correctamente!");
             model.addAttribute("assignment", result);
             return "assignments/create-success";
         } catch (Exception e) {
