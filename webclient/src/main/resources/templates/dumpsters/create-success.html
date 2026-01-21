@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conteneodr creado - Ecoembes</title>
+    <title>Contenedor creado - Ecoembes</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>♻️ Ecoembes</h1>
+            <h1>🌱 Ecoembes</h1>
             <nav>
-                <a th:href="@{/home}">Home</a>
-                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
             </nav>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2> Contenedor creado correctamente!</h2>
+            <h2>✅ Contenedor creado correctamente!</h2>
 
             <div class="alert alert-success">
-                <p th:text="${success}"></p>
+                <p>El contenedor ha sido registrado correctamente en el sistema.</p>
             </div>
 
-            <div th:if="${dumpster}">
+            <div th:if="${contenedor}">
                 <h3>Detalles de contenedor:</h3>
                 <table>
                     <tr>
@@ -34,26 +34,26 @@
                     </tr>
                     <tr>
                         <td><strong>ID Contenedor:</strong></td>
-                        <td th:text="${dumpster['dumpsterID']}"></td>
+                        <td th:text="${contenedor['idContenedor']}"></td>
                     </tr>
                     <tr>
                         <td><strong>Localidad:</strong></td>
-                        <td th:text="${dumpster['location']}"></td>
+                        <td th:text="${contenedor['localidad']}"></td>
                     </tr>
                     <tr>
                         <td><strong>Nivel de llenado:</strong></td>
-                        <td th:text="${dumpster['fillLevel']}"></td>
+                        <td th:text="${contenedor['nivelDeLlenado']}"></td>
                     </tr>
                     <tr>
-                        <td><strong>Número de conteneodres:</strong></td>
-                        <td th:text="${dumpster['containersNumber']}"></td>
+                        <td><strong>Número de contenedores:</strong></td>
+                        <td th:text="${contenedor['numeroDeContenedor']}"></td>
                     </tr>
                 </table>
             </div>
 
             <div style="margin-top: 20px;">
-                <a th:href="@{/dumpsters/create}" class="btn btn-primary">Crear otro</a>
-                <a th:href="@{/home}" class="btn btn-secondary">Volver a home</a>
+                <a th:href="@{/web/dumpsters/create}" class="btn btn-primary">Crear otro contenedor</a>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Volver al Menú</a>
             </div>
         </div>
     </div>

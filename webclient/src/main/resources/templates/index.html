@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Ecoembes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>🌱 Ecoembes Management System</h1>
+            <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Bienvenido al panel de Ecoembes</h2>
+            <p>Selecciona una opción de debajo para manejar contenedores, plantas y tareas.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Dumpsters Section -->
+            <a th:href="@{/web/dumpsters/create}" class="dashboard-card">
+                <h3>🗑️ Crear contenedor</h3>
+                <p>Registrar nuevo contenedor en el sistema</p>
+            </a>
+
+            <a th:href="@{/web/dumpsters/query}" class="dashboard-card">
+                <h3>📊 Petición de uso de contenedor</h3>
+                <p>Mirar las estadísticas de uso de contenedor</p>
+            </a>
+
+            <a th:href="@{/web/dumpsters/status}" class="dashboard-card">
+                <h3>🔍 Revisar estado de contenedor</h3>
+                <p>Revisar estado actual de los contenedores</p>
+            </a>
+
+            <!-- Plants Section -->
+            <a th:href="@{/web/plants}" class="dashboard-card">
+                <h3>🏭 Mirar todas las plantas</h3>
+                <p>Mirar todas las plantas de reciclaje</p>
+            </a>
+
+            <a th:href="@{/web/plants/capacity}" class="dashboard-card">
+                <h3>📈 Revisar capacidad de planta</h3>
+                <p>Mirar la capacidad disponible en las plantas</p>
+            </a>
+
+            <!-- Assignment Section -->
+            <a th:href="@{/web/assignments/create}" class="dashboard-card">
+                <h3>📦 Asignar contenedores</h3>
+                <p>Asignar contenedores a plantas de reciclaje</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
