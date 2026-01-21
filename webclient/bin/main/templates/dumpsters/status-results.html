@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de estado de contenedor - Ecoembes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>🌱 Ecoembes</h1>
+            <nav>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Resultado de estado de contenedor</h2>
+
+            <div class="alert alert-info">
+                <p>Código postal: <strong th:text="${codigoPostal}"></strong> | Fecha: <strong th:text="${fecha}"></strong></p>
+            </div>
+
+            <div th:if="${contenedores != null and !contenedores.isEmpty()}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Contenedor</th>
+                            <th>Localidad</th>
+                            <th>Nivel de llenado</th>
+                            <th>Número de contenedores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="status : ${contenedores}">
+                            <td th:text="${status['idContenedor']}"></td>
+                            <td th:text="${status['localidad']}"></td>
+                            <td>
+                                <span th:text="${status['nivelDeLlenado']}"
+                                      th:style="'color: ' + ${status['nivelDeLlenado'] == 'green' ? 'green' : (status['nivelDeLlenado'] == 'orange' ? 'orange' : 'red')} + '; font-weight: bold;'">
+                                </span>
+                            </td>
+                            <td th:text="${status['numeroDeContenedor']}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${contenedores == null or contenedores.isEmpty()}" class="alert alert-info">
+                <p>No se han encontrado contenedores para el código postal y fecha especificados.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a th:href="@{/web/dumpsters/status}" class="btn btn-primary">Nueva petición</a>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Volver a Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

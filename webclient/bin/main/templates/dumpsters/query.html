@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peticion uso de contenedor - Ecoembes</title>
+    <title>Peticion de uso de contenedor - Ecoembes</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>♻️ Ecoembes</h1>
+            <h1>🌱 Ecoembes</h1>
             <nav>
-                <a th:href="@{/home}">Home</a>
-                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
             </nav>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>Peticion uso de contenedor</h2>
+            <h2>Petición de uso de contenedor</h2>
 
             <div th:if="${error}" class="alert alert-error">
                 <p th:text="${error}"></p>
             </div>
 
-            <form method="post" th:action="@{/dumpsters/query}">
+            <form method="post" th:action="@{/web/dumpsters/query}">
                 <div class="form-group">
                     <label for="startDate">Fecha inicio:</label>
                     <input type="date" id="startDate" name="startDate" required>
@@ -36,8 +36,8 @@
                     <input type="date" id="endDate" name="endDate" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Peticion uso</button>
-                <a th:href="@{/home}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Petición de uso</button>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

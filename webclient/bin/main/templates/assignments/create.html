@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar contenedores - Ecoembes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>🌱 Ecoembes</h1>
+            <nav>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Asignar contenedores a planta</h2>
+
+            <div th:if="${error}" class="alert alert-error">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form method="post" th:action="@{/web/assignments/create}">
+                <div class="form-group">
+                    <label for="plantId">Seleccionar planta:</label>
+                    <select id="plantId" name="plantId" required>
+                        <option value="">-- Selecciona una Planta --</option>
+                        <option th:each="plant : ${plants}"
+                                th:value="${plant['idPlanta']}"
+                                th:text="${plant['idPlanta'] + ' - ' + plant['nombrePlanta'] + ' (Capacidad: ' + plant['toneladadCapacidadDePlanta'] + ' tons)'}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dumpsterIds">IDs Contenedores (separados por coma):</label>
+                    <input type="text" id="dumpsterIds" name="dumpsterIds" required
+                           placeholder="e.g., D-123, D-456, D-789">
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Introducir múltiples IDs de contenedores separados por comas
+                    </small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear asignación</button>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

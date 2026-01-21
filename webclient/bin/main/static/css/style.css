@@ -13,7 +13,7 @@ body {
     padding: 20px;
 }
 
-/* Navegacion */
+/* Navigation */
 .navbar {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 15px 0;
@@ -58,7 +58,7 @@ body {
     background-color: #c82333;
 }
 
-/* Tarjetas */
+/* Cards */
 .card {
     background: white;
     border-radius: 10px;
@@ -74,7 +74,7 @@ body {
     padding-bottom: 10px;
 }
 
-/* Formas */
+/* Forms */
 .form-group {
     margin-bottom: 20px;
 }
@@ -105,7 +105,7 @@ body {
     border-color: #667eea;
 }
 
-/* Botones */
+/* Buttons */
 .btn {
     padding: 12px 24px;
     border: none;
@@ -195,7 +195,7 @@ table tr:hover {
     background-color: #f8f9fa;
 }
 
-/* Pagina de login */
+/* Login Page */
 .login-container {
     display: flex;
     justify-content: center;

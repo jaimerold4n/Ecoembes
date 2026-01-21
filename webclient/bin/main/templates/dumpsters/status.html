@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkear estado contenedor - Ecoembes</title>
+    <title>Revisar estado de Contenedor- Ecoembes</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>♻️ Ecoembes</h1>
+            <h1>🌱 Ecoembes</h1>
             <nav>
-                <a th:href="@{/home}">Home</a>
-                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
             </nav>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>Checkear estado de contenedor</h2>
+            <h2>Revisar estado de contenedor</h2>
 
             <div th:if="${error}" class="alert alert-error">
                 <p th:text="${error}"></p>
             </div>
 
-            <form method="post" th:action="@{/dumpsters/status}">
+            <form method="post" th:action="@{/web/dumpsters/status}">
                 <div class="form-group">
-                    <label for="postalCode">Codigo Postal:</label>
+                    <label for="postalCode">Código postal:</label>
                     <input type="text" id="postalCode" name="postalCode" required
                            placeholder="e.g., 48007">
                 </div>
@@ -37,8 +37,8 @@
                     <input type="date" id="date" name="date" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Checkear estado</button>
-                <a th:href="@{/home}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Revisar estado</button>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
