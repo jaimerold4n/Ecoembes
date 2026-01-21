@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarea creada - Ecoembes</title>
+    <title>Asginacion creada - Ecoembes</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>♻️ Ecoembes</h1>
+            <h1>🌱 Ecoembes</h1>
             <nav>
-                <a th:href="@{/home}">Home</a>
-                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
             </nav>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>Tarea creada correctamente!</h2>
+            <h2>✅ Asignación creada correctamente!</h2>
 
             <div class="alert alert-success">
-                <p th:text="${success}"></p>
+                <p>La asignación ha sido registrada correctamente en el sistema.</p>
             </div>
 
-            <div th:if="${assignment}">
-                <h3>Detalles de tarea:</h3>
+            <div th:if="${resultado}">
+                <h3>Detalles de la asignación:</h3>
                 <table>
                     <tr>
                         <th>Propiedad</th>
@@ -34,34 +34,34 @@
                     </tr>
                     <tr>
                         <td><strong>ID Empleado:</strong></td>
-                        <td th:text="${assignment['employeeId']}"></td>
+                        <td th:text="${resultado['empleadoId']}"></td>
                     </tr>
                     <tr>
                         <td><strong>Nombre empleado:</strong></td>
-                        <td th:text="${assignment['employeeName']}"></td>
+                        <td th:text="${resultado['nombreEmpleado']}"></td>
                     </tr>
                     <tr>
                         <td><strong>ID Planta:</strong></td>
-                        <td th:text="${assignment['plantId']}"></td>
+                        <td th:text="${resultado['plantaId']}"></td>
                     </tr>
                     <tr>
                         <td><strong>Contenedores asignados:</strong></td>
-                        <td th:text="${assignment['dumpsterIds']}"></td>
+                        <td th:text="${resultado['idsContenedor']}"></td>
                     </tr>
                     <tr>
-                        <td><strong>Fecha de tarea:</strong></td>
-                        <td th:text="${assignment['assignmentDate']}"></td>
+                        <td><strong>Fecha de asignación:</strong></td>
+                        <td th:text="${resultado['fechaTarea']}"></td>
                     </tr>
                     <tr>
                         <td><strong>Estado:</strong></td>
-                        <td th:text="${assignment['status']}"></td>
+                        <td th:text="${resultado['estado']}"></td>
                     </tr>
                 </table>
             </div>
 
             <div style="margin-top: 20px;">
-                <a th:href="@{/assignments/create}" class="btn btn-primary">Crear otra tarea</a>
-                <a th:href="@{/home}" class="btn btn-secondary">Volver a Home</a>
+                <a th:href="@{/web/assignments/create}" class="btn btn-primary">Crear otra asignación</a>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Volver a Home</a>
             </div>
         </div>
     </div>

@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear contenedor - Ecoembes</title>
+    <title>Crear Contenedor - Ecoembes</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>♻️ Ecoembes</h1>
+            <h1>🌱 Ecoembes</h1>
             <nav>
-                <a th:href="@{/home}">Home</a>
-                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+                <a th:href="@{/web/home}">Home</a>
+                <a th:href="@{/web/logout}" class="logout-btn">Logout</a>
             </nav>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>Crer nuevo contenedor</h2>
+            <h2>Crear Nuevo Contenedor</h2>
 
             <div th:if="${error}" class="alert alert-error">
                 <p th:text="${error}"></p>
             </div>
 
-            <form method="post" th:action="@{/dumpsters/create}">
+            <form method="post" th:action="@{/web/dumpsters/create}">
                 <div class="form-group">
                     <label for="location">Localidad:</label>
                     <input type="text" id="location" name="location" required
                            placeholder="e.g., Bilbao, Livensa Living, 48007">
                     <small style="color: #666; display: block; margin-top: 5px;">
-                        Introduce informacion completa de la localidad (ciudad, direccion, codigo postal)
+                        Introduce una localidad con la información completa (ciudad, dirección, código postal)
                     </small>
                 </div>
 
@@ -42,7 +42,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Crear contenedor</button>
-                <a th:href="@{/home}" class="btn btn-secondary">Cancelar</a>
+                <a th:href="@{/web/home}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
